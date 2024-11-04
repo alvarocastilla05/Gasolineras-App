@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
-import { Gasolinera, GasolineraListResponse } from '../../models/gasolinera-response.interfaces';
+import { Gasolinera } from '../../models/gasolinera-response.interfaces';
 
 @Component({
   selector: 'app-gasolinera',
@@ -9,35 +9,63 @@ import { Gasolinera, GasolineraListResponse } from '../../models/gasolinera-resp
 })
 export class GasolineraComponent implements OnInit {
 
- listadoGasolineras: Gasolinera[] = []
- 
+  listadoGasolineras: Gasolinera[] = []
+
 
 
   constructor(private gasolineraService: GasolinerasService) { }
 
+
+
   ngOnInit(): void {
     this.gasolineraService.getGasolineras().subscribe(respuesta => {
-      this.listadoGasolineras = respuesta.ListaEESSPrecio;  
+      this.listadoGasolineras = respuesta.ListaEESSPrecio;
+
     });
-    
-    
+
   }
-  replacer(key: string, value: any): any {
-    if (key === "string") {
-      key.replaceAll(" ", "");
-      key.replaceAll(".", "");
-      key.replaceAll("(", "");
-      key.replaceAll(")", "");
-      key.replaceAll("%", "");
+
+  replacer(key: string, value: string): string {
+    if (key.includes(' ')) {
+        key = key.replace(' ', '_');
+      return key;
     }
-    return value; 
+    if(key.includes('(')){
+      key = key.replace('(', '');
+      
+      return key;
+    }
+    if(key.includes(')')){
+      key = key.replace(')', '');
+      
+      return key;
+    }
+    if(key.includes('%')){
+      key = key.replace('%', '');
+      
+      return key;
+    }
+    if(key.includes('.')){
+      key = key.replace('.', '');
+      
+      return key;
+    }
+    if(key.includes('/')){
+      key = key.replace('/', '');
+      
+      return key;
+    }
+    return key;
   }
 
-  gasolineraParse (): Gasolinera{
-    return JSON.parse(JSON.stringify(this.listadoGasolineras), this.replacer)
+  gasolineraParse(gasolinera: Gasolinera): Gasolinera {
+    const gasolineraString = JSON.stringify(gasolinera, this.replacer, 2);
+    return JSON.parse(gasolineraString);
   }
 
-  
+
+
+
 
 
 
