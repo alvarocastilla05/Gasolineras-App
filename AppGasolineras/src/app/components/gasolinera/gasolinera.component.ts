@@ -25,13 +25,16 @@ export class GasolineraComponent implements OnInit {
   replacer(key: string, value: any): any {
     if (key === "string") {
       key.replaceAll(" ", "");
+      key.replaceAll(".", "");
+      key.replaceAll("(", "");
+      key.replaceAll(")", "");
+      key.replaceAll("%", "");
     }
     return value; 
   }
 
   gasolineraParse (): Gasolinera{
-    const gasolineraString = JSON.stringify(this.listadoGasolineras, this.replacer); 
-    return JSON.parse(gasolineraString);
+    return JSON.parse(JSON.stringify(this.listadoGasolineras), this.replacer)
   }
 
   
