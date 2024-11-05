@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GasolineraComponent } from './components/gasolinera/gasolinera.component';
 import { provideHttpClient } from '@angular/common/http';
 import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component';
+import { MaterialModule } from './material.module';
+import { FormControl } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    MaterialModule
   ],
   providers: [
     provideAnimationsAsync(),
