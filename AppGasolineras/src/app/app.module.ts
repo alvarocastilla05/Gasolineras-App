@@ -7,11 +7,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GasolineraComponent } from './components/gasolinera/gasolinera.component';
 import { provideHttpClient } from '@angular/common/http';
+import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GasolineraComponent
+    GasolineraComponent,
+    MenuNavComponent
   ],
   imports: [
     BrowserModule,
