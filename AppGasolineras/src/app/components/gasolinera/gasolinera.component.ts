@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
-import { Gasolinera } from '../../models/gasolinera-response.interfaces';
+import { Gasolinera } from '../../models/gasolinera-dto';
 
 
 @Component({
@@ -77,7 +77,7 @@ export class GasolineraComponent implements OnInit {
           gasolineraConNombresBuenos['postalCode'] = gasolineraChusquera[key];
         }
       });
-      
+      let gasolinera = new Gasolinera();
       newArray.push(gasolineraConNombresBuenos);
     });
   }
