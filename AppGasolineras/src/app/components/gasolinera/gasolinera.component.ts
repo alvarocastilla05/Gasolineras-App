@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-response.interfaces';
 
+
 @Component({
   selector: 'app-gasolinera',
   templateUrl: './gasolinera.component.html',
@@ -9,7 +10,7 @@ import { Gasolinera } from '../../models/gasolinera-response.interfaces';
 })
 export class GasolineraComponent implements OnInit {
 
-  listadoGasolineras: Gasolinera[] = []
+  listadoGasolineras: Gasolinera[] = [];
 
   /*
   myControl = new FormControl<string | User>('');
@@ -45,48 +46,45 @@ export class GasolineraComponent implements OnInit {
 
   ngOnInit(): void {
     this.gasolineraService.getGasolineras().subscribe(respuesta => {
-      this.listadoGasolineras = respuesta.ListaEESSPrecio;
+      //Transform la respuesta del API en String (JSON)
+      const responseString = JSON.stringify(respuesta);
+      let parsedData;
+      try{
+        //Transforma el String en un objeto JSON
+        parsedData = JSON.parse(responseString);
+        let arrayGasolineras = parsedData['ListaEESSPrecio'];
+        const sanitizedData = this.cleanProperties(parsedData);
+        console.log('Sanitized Data:', sanitizedData);
 
+      }catch(error){
+        console.error('Error parsing JSON', error);
+      }
+    })
+
+  }
+
+  private cleanProperties(arrayGasolineras: any) {
+    let newArray = [];
+    arrayGasolineras.forEach((gasolineraChusquera: any) => {
+      const gasolineraConNombresBuenos: any = {};
+
+      //Recorro los nombres de los aributos de la gasolinera que están mal escritos
+      Object.keys(gasolineraChusquera).forEach(key => {
+        //En la variable key tengo el nombre
+        //de la propiedad que estoy recorriendo
+
+        if(key === 'C.P.'){
+          gasolineraConNombresBuenos['postalCode'] = gasolineraChusquera[key];
+        }
+      });
+      
+      newArray.push(gasolineraConNombresBuenos);
     });
-
   }
 
-  replacer(key: string, value: string): string {
-    if (key.includes(' ')) {
-        key = key.replace(' ', '_');
-      return key;
-    }
-    if(key.includes('(')){
-      key = key.replace('(', '');
-      
-      return key;
-    }
-    if(key.includes(')')){
-      key = key.replace(')', '');
-      
-      return key;
-    }
-    if(key.includes('%')){
-      key = key.replace('%', '');
-      
-      return key;
-    }
-    if(key.includes('.')){
-      key = key.replace('.', '');
-      
-      return key;
-    }
-    if(key.includes('/')){
-      key = key.replace('/', '');
-      
-      return key;
-    }
-    return key;
-  }
+  
 
-  filtrarPorRotulo(rotulo: string): Gasolinera[] {
-    return this.listadoGasolineras.filter(gasolinera => gasolinera.Rótulo === rotulo);
-  }
+  
 
 
 

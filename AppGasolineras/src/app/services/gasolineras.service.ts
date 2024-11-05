@@ -10,7 +10,7 @@ export class GasolinerasService {
 
   constructor(private http: HttpClient) { }
 
-  getGasolineras(): Observable<GasolineraListResponse> {
-    return this.http.get<GasolineraListResponse>('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/EstacionesTerrestres/');
+  getGasolineras(){
+    return this.http.get('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/EstacionesTerrestres/');
   }
 }
