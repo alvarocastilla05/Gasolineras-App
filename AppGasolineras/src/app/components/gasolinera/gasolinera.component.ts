@@ -12,6 +12,7 @@ import { GasolineraMala } from '../../models/gasolinera-response.interfaces';
 export class GasolineraComponent implements OnInit {
 
   listadoGasolineras: Gasolinera[] = [];
+  gasolineraFiltrada: Gasolinera[] = [];
 
 
   constructor(private gasolineraService: GasolinerasService) {}
@@ -28,6 +29,14 @@ export class GasolineraComponent implements OnInit {
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
       } catch (error) {
         console.error('Error parsing JSON:', error);
+      }
+    });
+
+    this.gasolineraService.codigoPostalActual.subscribe(postalCode => {
+      if (postalCode) {
+        this.gasolineraFiltrada = this.listadoGasolineras.filter(station => station.postalCode === postalCode);
+      } else {
+        this.gasolineraFiltrada = this.listadoGasolineras;
       }
     });
   }

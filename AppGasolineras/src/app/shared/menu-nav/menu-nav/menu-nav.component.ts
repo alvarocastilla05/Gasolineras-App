@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Gasolinera } from '../../../models/gasolinera-dto';
+import { GasolinerasService } from '../../../services/gasolineras.service';
 
 @Component({
   selector: 'app-menu-nav',
@@ -10,6 +11,12 @@ export class MenuNavComponent {
 
   listadoGasolineras: Gasolinera[] = [];
   @Input() postalCode: string | undefined;
+
+  constructor(private gasolineraServicio: GasolinerasService) {}
+
+  onPostalCodeChange(postalCode: string) {
+    this.gasolineraServicio.changePostalCode(postalCode);
+  }
 
   filtrarPorCarburante(carburante: string) {
     if(carburante == 'Gasolina'){

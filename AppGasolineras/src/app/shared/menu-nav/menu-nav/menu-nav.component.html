@@ -21,10 +21,7 @@
 
       </div>
       <div>
-        <form class="d-flex">
-          <input type="text" class="form-control input w-100 rounded-5 border-0 py-2 px-3" placeholder="Introduce C.P." [(ngModel)]="postalCode">
-          <button type="submit" class="btn btn-primary fondoRojo rounded-5 ms-1 border-0"><i class="bi bi-search"></i></button>
-      </form>
+        <app-filter-cp (postalCodeChange)="onPostalCodeChange($event)"></app-filter-cp>
       </div>
       <div>
 
