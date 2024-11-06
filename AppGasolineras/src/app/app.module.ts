@@ -9,7 +9,7 @@ import { GasolineraComponent } from './components/gasolinera/gasolinera.componen
 import { provideHttpClient } from '@angular/common/http';
 import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component';
 import { MaterialModule } from './material.module';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgModel } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { FormControl } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    MaterialModule
+    MaterialModule,
+
   ],
   providers: [
     provideAnimationsAsync(),

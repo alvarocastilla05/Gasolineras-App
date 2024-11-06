@@ -9,17 +9,19 @@
     </div>
 
     <div class="d-flex justify-content-around" style="width: 45%;">
-      <!--div>
+      <div>
         <mat-form-field>
-          <mat-label>Favorite food</mat-label>
+          <mat-label>- Selecciona Carburante -</mat-label>
           <mat-select>
-            @for (food of foods; track food) {
-            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-            }
+            <!--(selectionChange)="filtrarPorCarburante($event.value)"-->
+            
+            <mat-option value="Gasolina">Gasolina</mat-option>
+            <mat-option value="GasoleoA">Gasoleo A</mat-option>
+            <mat-option value="Hidrogeno">Hidrogeno</mat-option>
           </mat-select>
         </mat-form-field>
 
-      </div-->
+      </div>
       <div>
 
       </div>
