@@ -13,6 +13,7 @@ export class GasolineraComponent implements OnInit {
 
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
+  rotulos: string[] = [];
 
 
   constructor(private gasolineraService: GasolinerasService) {}
@@ -71,6 +72,7 @@ export class GasolineraComponent implements OnInit {
     });
     return newArray;
   }
+
 
 
   

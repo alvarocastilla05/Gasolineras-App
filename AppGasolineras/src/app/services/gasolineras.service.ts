@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GasolineraListResponse } from '../models/gasolinera-response.interfaces';
+import { Gasolinera } from '../models/gasolinera-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +21,6 @@ export class GasolinerasService {
   changePostalCode(postalCode: string) {
     this.postalCodeOriginal.next(postalCode);
   }
+
+ 
 }
