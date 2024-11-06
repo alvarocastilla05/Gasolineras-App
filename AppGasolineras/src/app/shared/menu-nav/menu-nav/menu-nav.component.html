@@ -12,9 +12,7 @@
       <div>
         <mat-form-field>
           <mat-label>- Selecciona Carburante -</mat-label>
-          <mat-select>
-            <!--(selectionChange)="filtrarPorCarburante($event.value)"-->
-            
+          <mat-select (valueChange)="filtrarPorCarburante($event.value)">
             <mat-option value="Gasolina">Gasolina</mat-option>
             <mat-option value="GasoleoA">Gasoleo A</mat-option>
             <mat-option value="Hidrogeno">Hidrogeno</mat-option>
@@ -23,7 +21,10 @@
 
       </div>
       <div>
-
+        <form class="d-flex">
+          <input type="text" class="form-control input w-100 rounded-5 border-0 py-2 px-3" placeholder="Introduce C.P." [(ngModel)]="postalCode">
+          <button type="submit" class="btn btn-primary fondoRojo rounded-5 ms-1 border-0"><i class="bi bi-search"></i></button>
+      </form>
       </div>
       <div>
 
