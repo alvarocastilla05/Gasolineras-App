@@ -1,28 +1,37 @@
-<div class="container mt-5 pt-5">
+<div class="container-fluid mt-5 pt-5" style="width: 90%;">
     <div class="row mt-5">
         @for(gasolinera of listadoGasolineras; track listadoGasolineras.indexOf(gasolinera)){
-            <div class="col-md-3 col-12 p-2 my-3">
-                <div class="card border-3 rounded-4 h-100" style="width: 23rem; border-color: #FF8800;">
+            <div class="col-md-3 col-12 p-2 my-3 d-flex justify-content-center">
+                <div class="card border-3 rounded-4 h-100" style="width: 25rem; border-color: #FF8800;">
                     <div class="text-uppercase text-center rounded-top-4 bg-black py-2 px-3">
-                        <h1 class="m-0 py-1" style="color: #FF8800">{{gasolinera.nombre}}</h1>
+                        <h1 class="m-0 py-1" style="color: #FF8800">{{ gasolinera.nombre }}</h1>
                     </div>
                     <div class="card-body shadow">
-                        <h6 class="m-0 text-center" style="color: #FF8800"></h6>
+                        <h5 class="m-0 text-center" style="color: #FF8800"><i class="bi bi-geo-alt-fill"></i>&nbsp;{{ gasolinera.direccion }}</h5>
                         <div class="d-flex flex-column mt-3">
-                            <div class="container-100 d-flex justify-content-around align-items-center py-1">
-                                <h3 class="mb-0" style="width: 10%; color: #D90505;"><i class="bi bi-fuel-pump-fill"></i></h3>
-                                <h3 class="w-50 mb-0">GASÓLEO A</h3>
-                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #D90505;">{{gasolinera.precioGasoleoA}} €/l</h3>
+                            <div class="container-100 d-flex justify-content-between align-items-center py-1">
+                                <h3 class="mb-0" style="width: fit-content; color: #D90505;"><i class="bi bi-fuel-pump-fill"></i>&nbsp;
+                                    <span class="text-dark">Gasóleo A</span>
+                                </h3>
+                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #D90505;">{{ gasolinera.precioGasoleoA }} €/l</h3>
                             </div>
-                            <div class="container-100 d-flex justify-content-around align-items-center py-1">
-                                <h3 class="mb-0" style="width: 10%; color: #8F9900;"><i class="bi bi-fuel-pump-fill"></i></h3>
-                                <h3 class="w-50 mb-0">GASOLINA</h3>
-                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #8F9900;">{{gasolinera.precioGasolina98E5}} €/l</h3>
+                            <div class="container-100 d-flex justify-content-between align-items-center py-1">
+                                <h3 class="mb-0" style="width: fit-content; color: #8F9900;"><i class="bi bi-fuel-pump-fill"></i>&nbsp;
+                                    <span class="text-dark">Gasolina 98 E5</span>
+                                </h3>
+                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #8F9900;">{{ gasolinera.precioGasolina98E5 }} €/l</h3>
                             </div>
-                            <div class="container-100 d-flex justify-content-around align-items-center py-1">
-                                <h3 class="mb-0" style="width: 10%; color: #007DBB;"><i class="bi bi-fuel-pump-fill"></i></h3>
-                                <h3 class="w-50 mb-0">HIDRÓGENO</h3>
-                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #007DBB;">{{gasolinera.precioHidrogreno}} €/kg</h3>
+                            <div class="container-100 d-flex justify-content-between align-items-center py-1">
+                                <h3 class="mb-0" style="width: fit-content; color: #007DBB;"><i class="bi bi-fuel-pump-fill"></i>&nbsp;
+                                    <span class="text-dark">Hidrógeno</span>
+                                </h3>
+                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #007DBB;">{{ gasolinera.precioHidrogreno }} €/kg</h3>
+                            </div>
+                            <div class="container-100 d-flex justify-content-between align-items-center py-1">
+                                <h3 class="mb-0" style="width: fit-content; color: #ce9700;"><i class="bi bi-fuel-pump-fill"></i>&nbsp;
+                                    <span class="text-dark">Bioetanol</span>
+                                </h3>
+                                <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #ce9700;">{{ gasolinera.precioBioetanol }} €/l</h3>
                             </div>
                         </div>
                     </div>
