@@ -33,22 +33,30 @@ export class GasolineraComponent implements OnInit {
 
   private cleanProperties(arrayGasolineras: any) {
     let newArray: Gasolinera[] = [];
-    arrayGasolineras.forEach((gasolineraChusquera: GasolineraMala) => {
+    arrayGasolineras.forEach((gasolineraChusquera: any) => {
       const gasolineraConNombresGuenos: any = {};
 
       // Recorro los nombres de los atributo de la
       // gasolineraChusquera que están mal escritos
-      Object.keys(gasolineraChusquera).forEach((key) => {
+      /*Object.keys(gasolineraChusquera).forEach((key) => {
         // En la variable key tengo el nombre de la
         // propiedad que estoy recorriendo
         if (key === 'C.P.') {
           gasolineraConNombresGuenos['postalCode'] = gasolineraChusquera[key];
         }
       });
-      
-      
+      */
+      let gasolinera = new Gasolinera(
+        gasolineraChusquera['IDEESS'],
+        gasolineraChusquera['Rótulo'],
+        gasolineraChusquera['C.P.'],
+        gasolineraChusquera['Precio Gasolina 98 E5'],
+        gasolineraChusquera['Precio Gasoleo A'],
+        gasolineraChusquera['Precio Hidrogeno'],
 
-      newArray.push(gasolineraConNombresGuenos);
+      );
+
+      newArray.push(gasolinera);
     });
     return newArray;
   }
