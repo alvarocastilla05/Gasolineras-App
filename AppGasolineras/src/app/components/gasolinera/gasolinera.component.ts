@@ -49,11 +49,12 @@ export class GasolineraComponent implements OnInit {
       let gasolinera = new Gasolinera(
         gasolineraChusquera['IDEESS'],
         gasolineraChusquera['Rótulo'],
+        gasolineraChusquera['Dirección'],
         gasolineraChusquera['C.P.'],
         gasolineraChusquera['Precio Gasolina 98 E5'],
         gasolineraChusquera['Precio Gasoleo A'],
         gasolineraChusquera['Precio Hidrogeno'],
-
+        gasolineraChusquera['Precio Bioetanol']
       );
 
       newArray.push(gasolinera);
