@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-dto';
 import { GasolineraMala } from '../../models/gasolinera-response.interfaces';
@@ -13,6 +13,8 @@ export class GasolineraComponent implements OnInit {
 
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
+
+  @Input() gasolineras: Gasolinera[] = [];
 
 
   constructor(private gasolineraService: GasolinerasService) {}

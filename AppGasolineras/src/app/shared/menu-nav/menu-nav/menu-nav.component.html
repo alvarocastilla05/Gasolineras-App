@@ -8,25 +8,5 @@
       <h1 class="text-center mb-0 pt-3 ms-2 text-light">GasApp</h1>
     </div>
 
-    <div class="d-flex justify-content-around" style="width: 45%;">
-      <div>
-        <mat-form-field>
-          <mat-label>- Selecciona Carburante -</mat-label>
-          <mat-select (valueChange)="filtrarPorCarburante($event.value)">
-            <mat-option value="Gasolina">Gasolina</mat-option>
-            <mat-option value="GasoleoA">Gasoleo A</mat-option>
-            <mat-option value="Hidrogeno">Hidrogeno</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-      </div>
-      <div>
-        <app-filter-cp (postalCodeChange)="onPostalCodeChange($event)"></app-filter-cp>
-      </div>
-      <div>
-
-      </div>
-    </div>
-
   </div>
 </nav>
