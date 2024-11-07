@@ -8,5 +8,7 @@ export class Gasolinera {
       public precioGasoleoA: number,
       public precioHidrogreno: number,
       public precioBioetanol: number,
+      public longitud: number,
+      public latitud: number
     ) {}
   }

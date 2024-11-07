@@ -64,7 +64,9 @@ export class GasolineraComponent implements OnInit {
         gasolineraChusquera['Precio Gasolina 98 E5'],
         gasolineraChusquera['Precio Gasoleo A'],
         gasolineraChusquera['Precio Hidrogeno'],
-        gasolineraChusquera['Precio Bioetanol']
+        gasolineraChusquera['Precio Bioetanol'],
+        gasolineraChusquera['Longitud (WGS84)'],
+        gasolineraChusquera['Latitud'],
       );
 
       newArray.push(gasolinera);

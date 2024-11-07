@@ -11,13 +11,17 @@ import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component'
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { FilterCpComponent } from './components/filter-cp/filter-cp.component';
+import { GoogleMapsLinkPipe } from './pipes/google-maps-link.pipe';
+import { GoogleMapRoutePipe } from './pipes/google-map-route.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     GasolineraComponent,
     MenuNavComponent,
-    FilterCpComponent
+    FilterCpComponent,
+    GoogleMapsLinkPipe,
+    GoogleMapRoutePipe
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,7 @@ import { FilterCpComponent } from './components/filter-cp/filter-cp.component';
   ],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
   ],
   bootstrap: [AppComponent]
 })
