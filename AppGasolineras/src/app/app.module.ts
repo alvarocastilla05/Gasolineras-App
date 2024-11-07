@@ -9,11 +9,13 @@ import { GasolineraComponent } from './components/gasolinera/gasolinera.componen
 import { provideHttpClient } from '@angular/common/http';
 import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component';
 import { MaterialModule } from './modules/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsLinkPipe } from './pipes/google-maps-link.pipe';
 import { GoogleMapRoutePipe } from './pipes/google-map-route.pipe';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { ScreenComponent } from './components/screen/screen.component';
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,15 @@ import { ScreenComponent } from './components/screen/screen.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule, // add here if necessasry
+    RouterLinkActive,// add here if necessasry
+    RouterOutlet, // add here if necessasry
+    RouterLink,// add here if necessasry
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    MaterialModule
-
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [
     provideAnimationsAsync(),

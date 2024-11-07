@@ -13,10 +13,6 @@ export class MenuNavComponent {
 
   constructor(private gasolineraServicio: GasolinerasService) {}
 
-  onPostalCodeChange(postalCode: string) {
-    this.gasolineraServicio.changePostalCode(postalCode);
-  }
-
   filtrarPorCarburante(carburante: string) {
     if(carburante == 'Gasolina'){
       this.listadoGasolineras = this.listadoGasolineras.filter((gasolinera) => gasolinera.precioGasolina98E5 != null);
