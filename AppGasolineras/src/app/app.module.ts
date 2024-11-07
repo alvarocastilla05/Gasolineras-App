@@ -23,7 +23,7 @@ import { ScreenComponent } from './components/screen/screen.component';
     GoogleMapsLinkPipe,
     GoogleMapRoutePipe,
     FilterBarComponent,
-    ScreenComponent
+    ScreenComponent,
   ],
   imports: [
     BrowserModule,

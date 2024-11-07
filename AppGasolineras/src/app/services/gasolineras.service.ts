@@ -14,10 +14,5 @@ export class GasolinerasService {
     return this.http.get('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/');
   }
 
-  private postalCodeOriginal = new BehaviorSubject<string>('');
-  codigoPostalActual = this.postalCodeOriginal.asObservable();
-
-  changePostalCode(postalCode: string) {
-    this.postalCodeOriginal.next(postalCode);
-  }
+  
 }

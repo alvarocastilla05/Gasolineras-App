@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-dto';
-import { GasolineraMala } from '../../models/gasolinera-response.interfaces';
 
 
 @Component({
@@ -11,13 +10,15 @@ import { GasolineraMala } from '../../models/gasolinera-response.interfaces';
 })
 export class GasolineraComponent implements OnInit {
 
+  constructor(private gasolineraService: GasolinerasService) {}
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
 
+  @Input() filters: { carburante: string, min: number, max: number} | null = null;
   @Input() gasolineras: Gasolinera[] = [];
 
 
-  constructor(private gasolineraService: GasolinerasService) {}
+  
 
   ngOnInit() {
     this.gasolineraService.getGasolineras().subscribe((respuesta) => {
@@ -29,18 +30,17 @@ export class GasolineraComponent implements OnInit {
         parsedData = JSON.parse(respuestaEnString);
         let arrayGasolineras = parsedData['ListaEESSPrecio'];
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
+        this.gasolineraFiltrada = this.listadoGasolineras;
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
     });
+  }
 
-    this.gasolineraService.codigoPostalActual.subscribe(postalCode => {
-      if (postalCode) {
-        this.gasolineraFiltrada = this.listadoGasolineras.filter(station => station.postalCode === postalCode);
-      } else {
-        this.gasolineraFiltrada = this.listadoGasolineras;
-      }
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['filters']){
+      this.applyFilters();
+    }
   }
 
   private cleanProperties(arrayGasolineras: any) {
@@ -63,10 +63,10 @@ export class GasolineraComponent implements OnInit {
         gasolineraChusquera['Rótulo'],
         gasolineraChusquera['Dirección'],
         gasolineraChusquera['C.P.'],
-        gasolineraChusquera['Precio Gasolina 98 E5'],
-        gasolineraChusquera['Precio Gasoleo A'],
-        gasolineraChusquera['Precio Hidrogeno'],
-        gasolineraChusquera['Precio Bioetanol'],
+        this.corregirPrecio(gasolineraChusquera['Precio Gasolina 98 E5']),
+        this.corregirPrecio(gasolineraChusquera['Precio Gasoleo A']),
+        this.corregirPrecio(gasolineraChusquera['Precio Hidrogeno']),
+        this.corregirPrecio(gasolineraChusquera['Precio Bioetanol']),
         gasolineraChusquera['Longitud (WGS84)'],
         gasolineraChusquera['Latitud'],
       );
@@ -75,6 +75,48 @@ export class GasolineraComponent implements OnInit {
     });
     return newArray;
   }
+
+  private corregirPrecio(precio: string): number{
+    const precioCorregido = parseFloat(precio.replace(',', '.'));
+    return isNaN(precioCorregido) ? 0 : precioCorregido;
+  }
+
+  private applyFilters(){
+    //Lista vacia
+    this.gasolineraFiltrada = []; 
+
+    if(this.filters){
+      for(let gasolinera of this.listadoGasolineras){
+        let precio = 0;
+        switch(this.filters.carburante){
+          case 'Gasolina 98':
+            precio = gasolinera.precioGasolina98E5;
+            break;
+          case 'Gasoleo A':
+            precio = gasolinera.precioGasoleoA;
+            break;
+          case 'Hidrogeno':
+            precio = gasolinera.precioHidrogreno;
+            break;
+          case 'Bioetanol':
+            precio = gasolinera.precioBioetanol;
+            break;
+        }
+
+        if(
+          precio > 0 &&
+          precio >= this.filters.min &&
+          precio <= this.filters.max
+        ){
+          this.gasolineraFiltrada.push(gasolinera);
+        }else{
+          this.gasolineraFiltrada = this.listadoGasolineras;
+        }
+        
+      }
+    }
+  }
+
 
 
   
