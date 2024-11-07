@@ -8,10 +8,10 @@ import { Gasolinera } from '../../models/gasolinera-dto';
 })
 export class ScreenComponent {
 
-  @Input() filters: { carburante: string, min: number, max: number} | null = null;
+  filters: { carburante: string, min: number, max: number} | null = null;
   gasolineras: Gasolinera[] = [];
 
-  onSerchClicked(filters: { carburante: string, min: number, max: number}){
+  onSearchClicked(filters: { carburante: string, min: number, max: number}){
 
     this.filters = filters;
   }
