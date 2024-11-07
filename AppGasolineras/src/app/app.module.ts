@@ -10,18 +10,20 @@ import { provideHttpClient } from '@angular/common/http';
 import { MenuNavComponent } from './shared/menu-nav/menu-nav/menu-nav.component';
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
-import { FilterCpComponent } from './components/filter-cp/filter-cp.component';
 import { GoogleMapsLinkPipe } from './pipes/google-maps-link.pipe';
 import { GoogleMapRoutePipe } from './pipes/google-map-route.pipe';
+import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { ScreenComponent } from './components/screen/screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GasolineraComponent,
     MenuNavComponent,
-    FilterCpComponent,
     GoogleMapsLinkPipe,
-    GoogleMapRoutePipe
+    GoogleMapRoutePipe,
+    FilterBarComponent,
+    ScreenComponent
   ],
   imports: [
     BrowserModule,
