@@ -10,7 +10,6 @@ import { GasolinerasService } from '../../../services/gasolineras.service';
 export class MenuNavComponent {
 
   listadoGasolineras: Gasolinera[] = [];
-  @Input() postalCode: string | undefined;
 
   constructor(private gasolineraServicio: GasolinerasService) {}
 
@@ -30,11 +29,6 @@ export class MenuNavComponent {
     }
   }
 
-  filtrarPorCodigoPostal() {
-    this.listadoGasolineras = this.listadoGasolineras.filter((gasolinera) => {
-      return gasolinera.postalCode === this.postalCode;
-
-    });
-  }
+  
 
 }
