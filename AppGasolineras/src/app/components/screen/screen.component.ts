@@ -9,11 +9,18 @@ import { FilterDto } from '../../models/filter.dto';
 })
 export class ScreenComponent {
 
-  filters: FilterDto | null = null;
+  postalCode: String | undefined;
   gasolineras: Gasolinera[] = [];
+  filters: FilterDto | null = null;
 
-  onSearchClicked(filters:FilterDto){
-    debugger;
+  onSearchClicked1(postalCode: string){
+    
+    return this.postalCode = postalCode;
+
+  }
+
+  onSearchClicked2(filters:FilterDto){
+  
     this.filters = filters;
   }
 }

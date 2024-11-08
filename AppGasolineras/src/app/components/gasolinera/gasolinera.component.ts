@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-dto';
 import { FilterDto } from '../../models/filter.dto';
@@ -13,6 +13,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
 
   @Input() filters: FilterDto | null = null;
   @Input() gasolineras: Gasolinera[] = [];
+  @Input() postalCode: String | undefined;
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
 
@@ -33,13 +34,19 @@ export class GasolineraComponent implements OnInit, OnChanges {
         console.error('Error parsing JSON:', error);
       }
     });
+
   }
 
- ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    debugger
+    if(changes['postalCode']){
+      this.applyFilterCP();
+    }
     if(changes['filters']) {
       this.applyFilters();
     }
- }
+  }
+
 
 
 
@@ -81,48 +88,20 @@ export class GasolineraComponent implements OnInit, OnChanges {
     return isNaN(precioCorregido) ? 0 : precioCorregido;
   }
 
-  /*private applyFilters() {
-    //Lista vacia
+
+  applyFilterCP(){
     this.gasolineraFiltrada = [];
 
-    if (this.filters) {
-      this.gasolineras.filter((gasolinera) => {
-        let precio = 0;
-        if(this.filters != null){
-        switch (this.filters.carburante) {
-          case 'Gasolina98':
-            precio = gasolinera.precioGasolina98E5;
-            break;
-          case 'GasoleoA':
-            precio = gasolinera.precioGasoleoA;
-            break;
-          case 'Hidrogeno':
-            precio = gasolinera.precioHidrogreno;
-            break;
-          case 'Bioetanol':
-            precio = gasolinera.precioBioetanol;
-            break;
-          default:
-            precio = 0;
-            break;
-        }
-
-        if (
-          precio > 0 &&
-          precio >= this.filters.min &&
-          precio <= this.filters.max
-        ) {
+    if(this.postalCode){
+      for(let gasolinera of this.listadoGasolineras){
+        if(this.postalCode === gasolinera.postalCode){
           this.gasolineraFiltrada.push(gasolinera);
         }
-
       }
-
-      }
-      );}
     }
-  }*/
+  }
+  
 
-    
   private applyFilters(){
     //Lista vacia
     this.gasolineraFiltrada = []; 
@@ -158,6 +137,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
   }
 
 }
+
 
 
 

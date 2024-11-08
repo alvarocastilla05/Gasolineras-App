@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { GasolineraListResponse } from '../models/gasolinera-response.interfaces';
+import { Gasolinera } from '../models/gasolinera-dto';
+import { PostalCode } from '../models/cp.interfaces';
+
 
 
 @Injectable({
@@ -9,9 +14,17 @@ export class GasolinerasService {
 
   constructor(private http: HttpClient) { }
 
-  getGasolineras(){
-    return this.http.get('http://localhost:3000/ListaEESSPrecio');
+  getGasolineras(): Observable<Gasolinera>{
+    //return this.http.get<Gasolinera>('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/');
+    return this.http.get<Gasolinera>('http://localhost:3000/ListaEESSPrecio');
   }
 
+  getPostalCodeList(): Observable<PostalCode[]>{
+    return this.http.get<PostalCode[]>('http://localhost:3000/code-list');
+  }
+
+
+
   
+
 }
