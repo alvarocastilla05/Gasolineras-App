@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Gasolinera } from '../../models/gasolinera-dto';
+import { FilterDto } from '../../models/filter.dto';
 
 @Component({
   selector: 'app-screen',
@@ -8,5 +9,11 @@ import { Gasolinera } from '../../models/gasolinera-dto';
 })
 export class ScreenComponent {
 
+  filters: FilterDto | null = null;
   gasolineras: Gasolinera[] = [];
+
+  onSearchClicked(filters:FilterDto){
+    debugger;
+    this.filters = filters;
+  }
 }

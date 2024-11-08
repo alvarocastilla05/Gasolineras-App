@@ -1,1 +1,38 @@
-<p>filter-bar works!</p>
+<div class="container" style="padding-top: 175px;">
+    <div class="row justify-content-center">
+        
+        <!-- Dropdown de selección de carburante -->
+        <div class="col-md-4 mb-3">
+            <label for="carburanteSeleccionado" class="form-label">Tipo de Carburante</label>
+            <select class="form-select" id="carburanteSeleccionado" aria-label="Tipo de Carburante" [(ngModel)]="carburanteSeleccionado">
+                <option selected>- Seleccione Tipo de Carburante -</option>
+                <option value="Gasolina98">Gasolina 98</option>
+                <option value="GasoleoA">Gasoleo A</option>
+                <option value="Hidrogeno">Hidrógeno</option>
+                <option value="Bioetanol">Bioetanol</option>
+            </select>
+        </div>
+
+        <!-- Rango de precio y botón de búsqueda -->
+        <div class="col-md-4 mb-3">
+            <label for="precioRango" class="form-label">Rango de precio:</label>
+            <div class="d-flex align-items-center">
+                <mat-slider 
+                    class="flex-grow-1 me-3" 
+                    min="0" 
+                    max="3" 
+                    step="0.1"  
+                    [discrete]="true" 
+                    [showTickMarks]="0.1">
+                    <input [(ngModel)]="min" matSliderStartThumb>
+                    <input [(ngModel)]="max" matSliderEndThumb>
+                </mat-slider>
+            </div>
+            <button class="btn btn-primary mt-2 w-100" (click)="filtrarPorPrecio()">Buscar</button>
+        </div>
+
+    </div>
+</div>
+
+       
+        
