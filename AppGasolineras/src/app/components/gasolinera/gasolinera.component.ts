@@ -26,7 +26,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
       try {
         // Transformo el String en un objeto JSON
         parsedData = JSON.parse(respuestaEnString);
-        let arrayGasolineras = parsedData['ListaEESSPrecio'];
+        let arrayGasolineras = parsedData;
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
         this.gasolineraFiltrada = this.listadoGasolineras;
       } catch (error) {
