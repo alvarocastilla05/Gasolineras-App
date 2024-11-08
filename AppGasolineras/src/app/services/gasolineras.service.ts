@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { GasolineraListResponse } from '../models/gasolinera-response.interfaces';
+
 
 @Injectable({
   providedIn: 'root'

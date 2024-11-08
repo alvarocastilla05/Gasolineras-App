@@ -6,8 +6,8 @@
             <label for="carburanteSeleccionado" class="form-label">Tipo de Carburante</label>
             <select class="form-select" id="carburanteSeleccionado" aria-label="Tipo de Carburante" [(ngModel)]="carburanteSeleccionado">
                 <option selected>- Seleccione Tipo de Carburante -</option>
-                <option value="Gasolina 98">Gasolina 98</option>
-                <option value="Gasoleo A">Gasoleo A</option>
+                <option value="Gasolina98">Gasolina 98</option>
+                <option value="GasoleoA">Gasoleo A</option>
                 <option value="Hidrogeno">Hidrógeno</option>
                 <option value="Bioetanol">Bioetanol</option>
             </select>
@@ -21,8 +21,7 @@
                     class="flex-grow-1 me-3" 
                     min="0" 
                     max="3" 
-                    step="0.1" 
-                    [(ngModel)]="min" 
+                    step="0.1"  
                     [discrete]="true" 
                     [showTickMarks]="0.1">
                     <input [(ngModel)]="min" matSliderStartThumb>

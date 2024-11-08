@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FilterDto } from '../../models/filter.dto';
 
 @Component({
   selector: 'app-filter-bar',
@@ -7,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class FilterBarComponent {
 
-  @Output() searchClicked = new EventEmitter<{ carburante: string, min: number, max: number}>();
+  @Output() searchClicked = new EventEmitter<FilterDto>();
 
   min: number = 0;
   max: number = 3;
@@ -15,7 +16,7 @@ export class FilterBarComponent {
 
   filtrarPorPrecio(){
     if(this.carburanteSeleccionado && this.min !== null && this.max !== null){
-      this.searchClicked.emit({carburante: this.carburanteSeleccionado, min: this.min, max: this.max});
+      this.searchClicked.emit(new FilterDto(this.carburanteSeleccionado, this.min, this.max));
     }else{
       alert('Debes seleccionar un carburante y un rango de precios');
     }
