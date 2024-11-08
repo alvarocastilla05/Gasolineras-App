@@ -9,22 +9,6 @@ import { GasolinerasService } from '../../../services/gasolineras.service';
 })
 export class MenuNavComponent {
 
-  listadoGasolineras: Gasolinera[] = [];
-
-  constructor(private gasolineraServicio: GasolinerasService) {}
-
-  filtrarPorCarburante(carburante: string) {
-    if(carburante == 'Gasolina'){
-      this.listadoGasolineras = this.listadoGasolineras.filter((gasolinera) => gasolinera.precioGasolina98E5 != null);
-    }
-    if(carburante == 'Gasoleo A'){
-      this.listadoGasolineras = this.listadoGasolineras.filter((gasolinera) => gasolinera.precioGasoleoA != null);
-    }
-    if(carburante == 'Hidrogeno'){
-      this.listadoGasolineras = this.listadoGasolineras.filter((gasolinera) => gasolinera.precioHidrogreno != null);
-    }
-  }
-
-  
+ 
 
 }

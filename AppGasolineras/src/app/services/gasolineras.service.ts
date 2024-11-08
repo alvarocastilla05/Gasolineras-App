@@ -5,6 +5,8 @@ import { GasolineraListResponse } from '../models/gasolinera-response.interfaces
 import { Gasolinera } from '../models/gasolinera-dto';
 import { PostalCode } from '../models/cp.interfaces';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,5 +22,9 @@ export class GasolinerasService {
   getPostalCodeList(): Observable<PostalCode[]>{
     return this.http.get<PostalCode[]>('http://localhost:3000/code-list');
   }
+
+
+
+  
 
 }

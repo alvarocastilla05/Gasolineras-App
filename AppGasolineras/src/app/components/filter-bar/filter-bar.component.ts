@@ -1,8 +1,11 @@
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { PostalCode } from '../../models/cp.interfaces';
 import { GasolinerasService } from '../../services/gasolineras.service';
+import { FilterDto } from '../../models/filter.dto';
+
 
 @Component({
   selector: 'app-filter-bar',
@@ -11,7 +14,13 @@ import { GasolinerasService } from '../../services/gasolineras.service';
 })
 export class FilterBarComponent {
 
+
   postalCode: string | undefined;
+  
+  min: number = 0;
+  max: number = 3;
+  carburanteSeleccionado: string = '';
+  @Output() searchClicked = new EventEmitter<FilterDto>();
   @Output () postalCodeSeleccionado = new EventEmitter<string>();
 
   myControl = new FormControl('');
@@ -55,5 +64,12 @@ export class FilterBarComponent {
     }
   }
 
+  filtrarPorPrecio(){
+    if(this.carburanteSeleccionado && this.min !== null && this.max !== null){
+      this.searchClicked.emit(new FilterDto(this.carburanteSeleccionado, this.min, this.max));
+    }else{
+      alert('Debes seleccionar un carburante y un rango de precios');
+    }
+  }
 
 }

@@ -12,10 +12,11 @@ import { MaterialModule } from './modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsLinkPipe } from './pipes/google-maps-link.pipe';
 import { GoogleMapRoutePipe } from './pipes/google-map-route.pipe';
-import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { ScreenComponent } from './components/screen/screen.component';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     GoogleMapsLinkPipe,
     GoogleMapRoutePipe,
     FilterBarComponent,
-    ScreenComponent
+    ScreenComponent,
   ],
   imports: [
     BrowserModule,
