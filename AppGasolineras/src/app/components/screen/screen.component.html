@@ -1,5 +1,5 @@
 <app-menu-nav></app-menu-nav>
 
-<app-filter-bar></app-filter-bar>
+<app-filter-bar (postalCodeSeleccionado)="onSearchClicked($event)"></app-filter-bar>
 
-<app-gasolinera [gasolineras]="gasolineras"></app-gasolinera>
+<app-gasolinera [gasolineras]="gasolineras" [postalCode]="postalCode"></app-gasolinera>

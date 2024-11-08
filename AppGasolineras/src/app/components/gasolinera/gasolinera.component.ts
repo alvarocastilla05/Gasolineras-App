@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-dto';
 import { GasolineraMala } from '../../models/gasolinera-response.interfaces';
+import { PostalCode } from '../../models/cp.interfaces';
 
 
 @Component({
@@ -9,14 +10,14 @@ import { GasolineraMala } from '../../models/gasolinera-response.interfaces';
   templateUrl: './gasolinera.component.html',
   styleUrl: './gasolinera.component.css'
 })
-export class GasolineraComponent implements OnInit {
+export class GasolineraComponent implements OnInit, OnChanges {
 
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
-
   @Input() gasolineras: Gasolinera[] = [];
-  
 
+  @Input() postalCode: String | undefined;
+  
   constructor(private gasolineraService: GasolinerasService) {}
 
   ngOnInit() {
@@ -27,12 +28,20 @@ export class GasolineraComponent implements OnInit {
       try {
         // Transformo el String en un objeto JSON
         parsedData = JSON.parse(respuestaEnString);
-        let arrayGasolineras = parsedData['ListaEESSPrecio'];
+        let arrayGasolineras = parsedData;
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
+        this.gasolineraFiltrada = this.listadoGasolineras;
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    debugger
+    if(changes['postalCode']){
+      this.applyFilterCP();
+    }
   }
 
   private cleanProperties(arrayGasolineras: any) {
@@ -68,6 +77,16 @@ export class GasolineraComponent implements OnInit {
     return newArray;
   }
 
+  applyFilterCP(){
+    this.gasolineraFiltrada = [];
 
+    if(this.postalCode){
+      for(let gasolinera of this.listadoGasolineras){
+        if(this.postalCode === gasolinera.postalCode){
+          this.gasolineraFiltrada.push(gasolinera);
+        }
+      }
+    }
+  }
   
 }

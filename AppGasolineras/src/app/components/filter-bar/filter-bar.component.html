@@ -1,12 +1,13 @@
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid mt-5 pt-5">
+    <div class="row mt-5">
         <form class="example-form">
             <mat-form-field class="example-full-width">
-              <mat-label>Código Postal</mat-label>
+              <mat-label>Buscar por Código Postal</mat-label>
               <input type="text"
                      placeholder="Introduzca código postal"
                      aria-label="Number"
                      matInput
+                     [(ngModel)]="postalCode"
                      [formControl]="myControl"
                      [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete">
@@ -15,6 +16,8 @@
                 }
               </mat-autocomplete>
             </mat-form-field>
+
+            <button type="button" class="btn btn-primary" (click)="filtrarPorCP()">Filtrar</button>
         </form>
     </div>
 </div>

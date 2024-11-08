@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { PostalCode } from '../../models/cp.interfaces';
@@ -11,11 +11,12 @@ import { GasolinerasService } from '../../services/gasolineras.service';
 })
 export class FilterBarComponent {
 
-  myControl = new FormControl('');
+  postalCode: string | undefined;
+  @Output () postalCodeSeleccionado = new EventEmitter<string>();
 
+  myControl = new FormControl('');
   options: string[] = [];
   listadoCP: PostalCode[] = [];
-
   filteredOptions: Observable<string[]> | undefined;
 
   constructor(private gasolineraService: GasolinerasService){}
@@ -30,6 +31,7 @@ export class FilterBarComponent {
           this.options.push(codPos.codigo_postal.toString());
         }
       })
+
     })
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -43,4 +45,15 @@ export class FilterBarComponent {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+
+  filtrarPorCP(){
+    debugger;
+    if(this.postalCode){
+      this.postalCodeSeleccionado.emit(this.postalCode);
+    }else{
+      alert('C.P. no encontrado.')
+    }
+  }
+
+
 }

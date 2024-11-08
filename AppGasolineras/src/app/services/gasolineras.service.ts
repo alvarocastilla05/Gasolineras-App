@@ -13,11 +13,12 @@ export class GasolinerasService {
   constructor(private http: HttpClient) { }
 
   getGasolineras(): Observable<Gasolinera>{
-    return this.http.get<Gasolinera>('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/');
+    //return this.http.get<Gasolinera>('https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/');
+    return this.http.get<Gasolinera>('http://localhost:3000/ListaEESSPrecio');
   }
 
   getPostalCodeList(): Observable<PostalCode[]>{
-    return this.http.get<PostalCode[]>('https://localhost:3000/code-list');
+    return this.http.get<PostalCode[]>('http://localhost:3000/code-list');
   }
 
 }

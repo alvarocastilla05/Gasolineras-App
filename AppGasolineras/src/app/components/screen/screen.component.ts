@@ -8,5 +8,11 @@ import { Gasolinera } from '../../models/gasolinera-dto';
 })
 export class ScreenComponent {
 
+  postalCode: String | undefined;
   gasolineras: Gasolinera[] = [];
+
+  onSearchClicked(postalCode: string){
+    debugger;
+    return this.postalCode = postalCode;
+  }
 }

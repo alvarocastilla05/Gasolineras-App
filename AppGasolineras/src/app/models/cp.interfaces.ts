@@ -1,6 +1,6 @@
 export interface Root {
-    "code-list": PostalCode[]
-  }
+    "code-list": PostalCode[];
+}
   
 export interface PostalCode {
     codigo_postal: number
