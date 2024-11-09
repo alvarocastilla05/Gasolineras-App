@@ -7,8 +7,6 @@ import { PostalCode } from '../models/cp.interfaces';
 import { CCAA } from '../models/comunidades.interfaces';
 import { Provincia } from '../models/provincia.interfaces';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,9 +30,5 @@ export class GasolinerasService {
   getProvincias(IDCCAA: string): Observable<Provincia[]>{
     return this.http.get<Provincia[]>(`https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/ProvinciasPorComunidad/${IDCCAA}`);
   }
-
-
-
-  
 
 }

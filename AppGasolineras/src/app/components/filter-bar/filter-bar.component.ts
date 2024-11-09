@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { PostalCode } from '../../models/cp.interfaces';
@@ -14,27 +14,27 @@ import { Provincia } from '../../models/provincia.interfaces';
   templateUrl: './filter-bar.component.html',
   styleUrl: './filter-bar.component.css',
 })
-export class FilterBarComponent {
-
+export class FilterBarComponent implements OnInit, OnChanges{
 
   postalCode: string | undefined;
   
   min: number = 0;
   max: number = 3;
   carburanteSeleccionado: string = '';
+
   myControl = new FormControl('');
   options: string[] = [];
   listadoCP: PostalCode[] = [];
   filteredOptions: Observable<string[]> | undefined;
-  comunidad: CCAA[] | undefined;
-  provincia: Provincia[] | undefined;
-  comunidadSeleccionada: CCAA | undefined; 
-  provinciaSeleccionada: Provincia | undefined;
+
+  listadoComunidades: CCAA[] | undefined;
+  listadoProvincias: Provincia[] | undefined;
+  comunidad: CCAA | undefined; 
+  provincia: Provincia | undefined;
 
   @Output() searchClicked = new EventEmitter<FilterDto>();
   @Output () postalCodeSeleccionado = new EventEmitter<string>();
-  @Output() comunidadesSeleccionadas = new EventEmitter<CCAA>();
-
+  @Output() comunidadSeleccionada = new EventEmitter<CCAA>();
 
   constructor(private gasolineraService: GasolinerasService){}
 
@@ -43,20 +43,29 @@ export class FilterBarComponent {
       this.listadoCP = respuesta;
       this.listadoCP.forEach(codPos => {
         if(this.options.includes(codPos.codigo_postal.toString())){
-          //El método no hagas nada.
+          //Aquí el método no hace nada. YA LO SÉ, HACER ESTO ES UNA CHUSQUERÍA DE LAS GORDAS.
         }else{
           this.options.push(codPos.codigo_postal.toString());
         }
       })
     })
     this.gasolineraService.getComunidades().subscribe((respuesta) => {
-      this.comunidad = respuesta;
-    })
-
+      this.listadoComunidades = respuesta;
+    });
+    
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    debugger
+    if (changes['comunidad']) {
+      this.gasolineraService.getProvincias(this.comunidad!.IDCCAA).subscribe((respuesta) => {
+        this.listadoProvincias = respuesta;
+      });
+    }
   }
 
   private _filter(value: string): string[] {
@@ -65,24 +74,25 @@ export class FilterBarComponent {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  loadComunidades(){
+  //-----------------------------------------------------------------------------------
+
+  /*loadComunidades(){
     this.gasolineraService.getComunidades().subscribe((respuesta) => {
-      this.comunidad = respuesta;
+      this.listadoComunidades = respuesta;
     })
   }
 
   loadProvincias(){
     if(this.comunidadSeleccionada){
       this.gasolineraService.getProvincias(this.comunidadSeleccionada.IDCCAA).subscribe((respuesta) => {
-        this.provincia = respuesta;
+        this.listadoProvincias = respuesta;
       })
     }else{
       alert('Debes seleccionar una comunidad autónoma');
     }
-  }
+  }*/
 
   filtrarPorCP(){
-    debugger;
     if(this.postalCode){
       this.postalCodeSeleccionado.emit(this.postalCode);
     }else{
@@ -98,10 +108,23 @@ export class FilterBarComponent {
     }
   }
 
+  filtrarPorCCAAoProvincia(){
+    if(this.comunidad){
+      if(this.comunidad && this.provincia == undefined){
+        this.comunidadSeleccionada.emit(this.comunidad);
+      }else{
+        this.comunidadSeleccionada.emit(this.provincia);
+      }
+    }else{
+      alert('Debes seleccionar una comunidad autónoma');
+    }
+  }
+
+
   filtrarPorComunidad(){
     debugger;
     if(this.comunidadSeleccionada){
-      this.comunidadesSeleccionadas.emit(this.comunidadSeleccionada);
+      this.comunidadSeleccionada.emit(this.comunidad);
     }else{
       alert('Debes seleccionar una comunidad autónoma');
     }
@@ -109,8 +132,8 @@ export class FilterBarComponent {
 
   filtrarPorProvincia(){
     debugger;
-    if(this.provinciaSeleccionada){
-      this.comunidadesSeleccionadas.emit(this.provinciaSeleccionada);
+    if(this.provincia){
+      this.comunidadSeleccionada.emit(this.provincia);
     }else{
       alert('Debes seleccionar una provincia');
     }

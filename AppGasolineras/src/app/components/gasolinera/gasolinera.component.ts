@@ -38,7 +38,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
         console.error('Error parsing JSON:', error);
       }
     });
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -56,9 +55,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
       this.applyFilterProvincia();
     }
   }
-
-
-
 
   private cleanProperties(arrayGasolineras: any) {
     let newArray: Gasolinera[] = [];
@@ -100,7 +96,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
     return isNaN(precioCorregido) ? 0 : precioCorregido;
   }
 
-
   applyFilterCP() {
     this.gasolineraFiltrada = [];
 
@@ -112,7 +107,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
       }
     }
   }
-
 
   private applyFilters() {
     //Lista vacia
