@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Gasolinera } from '../../models/gasolinera-dto';
 import { FilterDto } from '../../models/filter.dto';
+import { CCAA } from '../../models/comunidades.interfaces';
 
 @Component({
   selector: 'app-screen',
@@ -10,6 +11,7 @@ import { FilterDto } from '../../models/filter.dto';
 export class ScreenComponent {
 
   postalCode: String | undefined;
+  comunidad: CCAA | undefined;
   gasolineras: Gasolinera[] = [];
   filters: FilterDto | null = null;
 
@@ -23,4 +25,11 @@ export class ScreenComponent {
   
     this.filters = filters;
   }
+
+  onSearchClicked3(comunidad: CCAA){
+  
+    this.comunidad = comunidad;
+  }
+
+  
 }

@@ -9,6 +9,7 @@ export class Gasolinera {
       public precioHidrogreno: number,
       public precioBioetanol: number,
       public longitud: number,
-      public latitud: number
+      public latitud: number,
+      public idCCAA: string,
     ) {}
   }

@@ -5,6 +5,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { PostalCode } from '../../models/cp.interfaces';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { FilterDto } from '../../models/filter.dto';
+import { CCAA } from '../../models/comunidades.interfaces';
 
 
 @Component({
@@ -20,13 +21,17 @@ export class FilterBarComponent {
   min: number = 0;
   max: number = 3;
   carburanteSeleccionado: string = '';
-  @Output() searchClicked = new EventEmitter<FilterDto>();
-  @Output () postalCodeSeleccionado = new EventEmitter<string>();
-
   myControl = new FormControl('');
   options: string[] = [];
   listadoCP: PostalCode[] = [];
   filteredOptions: Observable<string[]> | undefined;
+  comunidad: CCAA[] | undefined;
+  comunidadSeleccionada: CCAA | undefined; 
+
+  @Output() searchClicked = new EventEmitter<FilterDto>();
+  @Output () postalCodeSeleccionado = new EventEmitter<string>();
+  @Output() comunidadesSeleccionadas = new EventEmitter<CCAA>();
+
 
   constructor(private gasolineraService: GasolinerasService){}
 
@@ -40,7 +45,9 @@ export class FilterBarComponent {
           this.options.push(codPos.codigo_postal.toString());
         }
       })
-
+    })
+    this.gasolineraService.getComunidades().subscribe((respuesta) => {
+      this.comunidad = respuesta;
     })
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -53,6 +60,12 @@ export class FilterBarComponent {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  loadComunidades(){
+    this.gasolineraService.getComunidades().subscribe((respuesta) => {
+      this.comunidad = respuesta;
+    })
   }
 
   filtrarPorCP(){
@@ -69,6 +82,15 @@ export class FilterBarComponent {
       this.searchClicked.emit(new FilterDto(this.carburanteSeleccionado, this.min, this.max));
     }else{
       alert('Debes seleccionar un carburante y un rango de precios');
+    }
+  }
+
+  filtrarPorComunidad(){
+    debugger;
+    if(this.comunidadSeleccionada){
+      this.comunidadesSeleccionadas.emit(this.comunidadSeleccionada);
+    }else{
+      alert('Debes seleccionar una comunidad autónoma');
     }
   }
 
