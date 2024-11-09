@@ -6,6 +6,7 @@ import { PostalCode } from '../../models/cp.interfaces';
 import { GasolinerasService } from '../../services/gasolineras.service';
 import { FilterDto } from '../../models/filter.dto';
 import { CCAA } from '../../models/comunidades.interfaces';
+import { Provincia } from '../../models/provincia.interfaces';
 
 
 @Component({
@@ -26,7 +27,9 @@ export class FilterBarComponent {
   listadoCP: PostalCode[] = [];
   filteredOptions: Observable<string[]> | undefined;
   comunidad: CCAA[] | undefined;
+  provincia: Provincia[] | undefined;
   comunidadSeleccionada: CCAA | undefined; 
+  provinciaSeleccionada: Provincia | undefined;
 
   @Output() searchClicked = new EventEmitter<FilterDto>();
   @Output () postalCodeSeleccionado = new EventEmitter<string>();
@@ -68,6 +71,16 @@ export class FilterBarComponent {
     })
   }
 
+  loadProvincias(){
+    if(this.comunidadSeleccionada){
+      this.gasolineraService.getProvincias(this.comunidadSeleccionada.IDCCAA).subscribe((respuesta) => {
+        this.provincia = respuesta;
+      })
+    }else{
+      alert('Debes seleccionar una comunidad autónoma');
+    }
+  }
+
   filtrarPorCP(){
     debugger;
     if(this.postalCode){
@@ -91,6 +104,15 @@ export class FilterBarComponent {
       this.comunidadesSeleccionadas.emit(this.comunidadSeleccionada);
     }else{
       alert('Debes seleccionar una comunidad autónoma');
+    }
+  }
+
+  filtrarPorProvincia(){
+    debugger;
+    if(this.provinciaSeleccionada){
+      this.comunidadesSeleccionadas.emit(this.provinciaSeleccionada);
+    }else{
+      alert('Debes seleccionar una provincia');
     }
   }
 

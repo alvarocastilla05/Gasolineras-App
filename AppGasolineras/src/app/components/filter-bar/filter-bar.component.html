@@ -41,11 +41,20 @@
             <div class="col-md-12 mb-3">
                 <label for="comunidadSeleccionada" class="form-label">Comunidad Autónoma</label>
                 <select class="form-select" id="comunidadSeleccionada" aria-label="Comunidad Autónoma"
-                    [(ngModel)]="comunidadSeleccionada">
+                    [(ngModel)]="comunidadSeleccionada" (selectionchange)="filtrarPorComunidad()">
                     <option selected>- Seleccione Comunidad Autónoma -</option>
                     <option *ngFor="let comunidad of comunidad" [value]="comunidad.IDCCAA">{{comunidad.CCAA}}</option>
                 </select>
             </div>
+            <div class="col-md-12 mb-3">
+                <label for="provinciaSeleccionada" class="form-label">Provincia</label>
+                <select class="form-select" id="provinciaSeleccionada" aria-label="Provincia"
+                    [(ngModel)]="provinciaSeleccionada">
+                    <option selected>- Seleccione Provincia -</option>
+                    <option *ngFor="let provincia of provincia" [value]="provincia.IDPovincia">{{provincia.Provincia}}</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" (click)="filtrarPorProvincia()">Filtrar</button>
         </div>
     </div>
 </div>

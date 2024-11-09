@@ -5,6 +5,7 @@ import { GasolineraListResponse } from '../models/gasolinera-response.interfaces
 import { Gasolinera } from '../models/gasolinera-dto';
 import { PostalCode } from '../models/cp.interfaces';
 import { CCAA } from '../models/comunidades.interfaces';
+import { Provincia } from '../models/provincia.interfaces';
 
 
 
@@ -26,6 +27,10 @@ export class GasolinerasService {
 
   getComunidades(): Observable<CCAA[]> {
     return this.http.get<CCAA[]>('http://localhost:3000/comunidades');
+  }
+
+  getProvincias(IDCCAA: string): Observable<Provincia[]>{
+    return this.http.get<Provincia[]>(`https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/ProvinciasPorComunidad/${IDCCAA}`);
   }
 
 

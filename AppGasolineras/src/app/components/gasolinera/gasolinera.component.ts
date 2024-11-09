@@ -3,6 +3,7 @@ import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-dto';
 import { FilterDto } from '../../models/filter.dto';
 import { CCAA } from '../../models/comunidades.interfaces';
+import { Provincia } from '../../models/provincia.interfaces';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
   @Input() gasolineras: Gasolinera[] = [];
   @Input() postalCode: String | undefined;
   @Input() comunidad: CCAA | undefined;
+  @Input() provincia: Provincia | undefined;
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
 
@@ -50,7 +52,11 @@ export class GasolineraComponent implements OnInit, OnChanges {
     if (changes['comunidad']) {
       this.applyFilterComunidad();
     }
+    if (changes['provincia']) {
+      this.applyFilterProvincia();
+    }
   }
+
 
 
 
@@ -81,6 +87,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
         gasolineraChusquera['Longitud (WGS84)'],
         gasolineraChusquera['Latitud'],
         gasolineraChusquera['IDCCAA'],
+        gasolineraChusquera['IDPROV']
       );
 
       newArray.push(gasolinera);
@@ -154,6 +161,18 @@ export class GasolineraComponent implements OnInit, OnChanges {
 
     }
 
+  }
+
+  private applyFilterProvincia() {
+    this.gasolineraFiltrada = [];
+
+    if (this.provincia) {
+      for (let gasolinera of this.listadoGasolineras) {
+        if (this.provincia.IDPovincia === gasolinera.idProvincia) {
+          this.gasolineraFiltrada.push(gasolinera);
+        }
+      }
+    }
   }
 
 }
