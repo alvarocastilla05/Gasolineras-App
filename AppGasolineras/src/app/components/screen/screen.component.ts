@@ -33,5 +33,10 @@ export class ScreenComponent {
     this.comunidad = comunidad;
   }
 
+  onsSearchClicked4(provincia: Provincia){
+    
+      this.provincia = provincia;
+    }
+
   
 }
