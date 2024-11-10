@@ -68,6 +68,7 @@ export class FilterBarComponent implements OnInit, OnChanges {
     }
   }
 
+  //Filtro por C.P.
   filtrarPorCP() {
     if (this.postalCode) {
       this.postalCodeSeleccionado.emit(this.postalCode);
@@ -76,6 +77,7 @@ export class FilterBarComponent implements OnInit, OnChanges {
     }
   }
 
+  //Filtro por carburante y rango de precios
   filtrarPorPrecio() {
     if (this.carburanteSeleccionado && this.min !== null && this.max !== null) {
       this.searchClicked.emit(new FilterDto(this.carburanteSeleccionado, this.min, this.max));
@@ -84,6 +86,7 @@ export class FilterBarComponent implements OnInit, OnChanges {
     }
   }
 
+  //Filtro por comunidad autónoma o por provincia
   filtrarPorCCAAoProvincia() {
     if (this.comunidad) {
       if (this.provincia == undefined) {
