@@ -28,10 +28,10 @@ export class ScreenComponent {
     this.filters = filters;
   }
 
-  /*onSearchClicked3(comunidad: CCAA){
+  onSearchClicked3(comunidad: CCAA){
   
     this.comunidad = comunidad;
-  }*/
+  }
 
   
 }

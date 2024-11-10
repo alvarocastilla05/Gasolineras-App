@@ -61,11 +61,7 @@ export class FilterBarComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     debugger
-    if (changes['comunidad']) {
-      this.gasolineraService.getProvincias(this.comunidad!.IDCCAA).subscribe((respuesta) => {
-        this.listadoProvincias = respuesta;
-      });
-    }
+    
   }
 
   private _filter(value: string): string[] {
