@@ -3,6 +3,7 @@ import { GasolinerasService } from '../../services/gasolineras.service';
 import { Gasolinera } from '../../models/gasolinera-dto';
 import { FilterDto } from '../../models/filter.dto';
 import { CCAA } from '../../models/comunidades.interfaces';
+import { Provincia } from '../../models/provincia.interfaces';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
   @Input() gasolineras: Gasolinera[] = [];
   @Input() postalCode: String | undefined;
   @Input() comunidad: CCAA | undefined;
+  @Input() provincia: Provincia | undefined;
   listadoGasolineras: Gasolinera[] = [];
   gasolineraFiltrada: Gasolinera[] = [];
 
@@ -36,7 +38,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
         console.error('Error parsing JSON:', error);
       }
     });
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,9 +51,10 @@ export class GasolineraComponent implements OnInit, OnChanges {
     if (changes['comunidad']) {
       this.applyFilterComunidad();
     }
+    if (changes['provincia']) {
+      this.applyFilterProvincia();
+    }
   }
-
-
 
   private cleanProperties(arrayGasolineras: any) {
     let newArray: Gasolinera[] = [];
@@ -81,6 +83,7 @@ export class GasolineraComponent implements OnInit, OnChanges {
         gasolineraChusquera['Longitud (WGS84)'],
         gasolineraChusquera['Latitud'],
         gasolineraChusquera['IDCCAA'],
+        gasolineraChusquera['IDPROV']
       );
 
       newArray.push(gasolinera);
@@ -93,7 +96,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
     return isNaN(precioCorregido) ? 0 : precioCorregido;
   }
 
-
   applyFilterCP() {
     this.gasolineraFiltrada = [];
 
@@ -105,7 +107,6 @@ export class GasolineraComponent implements OnInit, OnChanges {
       }
     }
   }
-
 
   private applyFilters() {
     //Lista vacia
@@ -154,6 +155,18 @@ export class GasolineraComponent implements OnInit, OnChanges {
 
     }
 
+  }
+
+  private applyFilterProvincia() {
+    this.gasolineraFiltrada = [];
+
+    if (this.provincia) {
+      for (let gasolinera of this.listadoGasolineras) {
+        if (this.provincia.IDPovincia === gasolinera.idProvincia) {
+          this.gasolineraFiltrada.push(gasolinera);
+        }
+      }
+    }
   }
 
 }

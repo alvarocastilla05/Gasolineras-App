@@ -7,7 +7,8 @@
                         <h1 class="m-0 py-1" style="color: #FF8800">{{ gasolinera.nombre }}</h1>
                     </div>
                     <div class="card-body shadow">
-                        <h5 class="m-0 text-center" style="color: #FF8800"><i class="bi bi-geo-alt-fill"></i>&nbsp;{{ gasolinera.direccion }}</h5>
+                        <h5 class="m-0" style="color: #FF8800"><i class="bi bi-geo-alt-fill"></i>&nbsp;{{ gasolinera.direccion }}</h5>
+                        <h5 class="m-0 text-dark mt-3"><i class="bi bi-envelope-fill"></i>&nbsp;{{ gasolinera.postalCode }}</h5>
                         <div class="d-flex flex-column mt-3">
                             <div class="container-100 d-flex justify-content-between align-items-center py-1">
                                 <h3 class="mb-0" style="width: fit-content; color: #D90505;"><i class="bi bi-fuel-pump-fill"></i>&nbsp;
@@ -34,7 +35,7 @@
                                 <h3 class="text-light p-1 px-2 mb-0 rounded-4" style="width: fit-content; background-color: #ce9700;">{{ gasolinera.precioBioetanol }} €/l</h3>
                             </div>
                             <div class="container-100 d-flex justify-content-between align-items-center py-1">
-                                <a class="btn btn-primary" [href]="gasolinera | googleMapRoute" target="_blank">Ubicacion</a>
+                                <a class="btn btn-primary" [href]="gasolinera | googleMapRoute" target="_blank">Ubicación</a>
                             </div>
                         </div>
                     </div>
